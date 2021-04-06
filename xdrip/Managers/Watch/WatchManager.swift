@@ -108,6 +108,11 @@ class WatchManager: NSObject {
             
         }
         
+        // adds my initials to calender event.
+        let myInitials = "J"        // In this case I only want first initial
+        
+        title = myInitials + ": " + title
+        
         // create an event now
         let event = EKEvent(eventStore: eventStore)
         event.title = title
