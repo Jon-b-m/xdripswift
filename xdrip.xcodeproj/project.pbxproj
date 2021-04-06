@@ -547,6 +547,7 @@
 		198D44D7260A3A3400A2B4A2 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Snooze.strings; sourceTree = "<group>"; };
 		198D44D8260A3A3400A2B4A2 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LibreNFC.strings; sourceTree = "<group>"; };
 		198D44E7260A822000A2B4A2 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
+		19D63E21261C6D61008DF37A /* xDrip4iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = xDrip4iOSDebug.entitlements; sourceTree = "<group>"; };
 		2867F5C725BC209400AA1E98 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		2867F5C825BC209400AA1E98 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2867F5C925BC209500AA1E98 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Main.strings; sourceTree = "<group>"; };
@@ -1822,6 +1823,7 @@
 		F870D3D425126A49008967B0 /* xDrip4iOS Widget */ = {
 			isa = PBXGroup;
 			children = (
+				19D63E21261C6D61008DF37A /* xDrip4iOSDebug.entitlements */,
 				F870D3EF25149EA0008967B0 /* Texts */,
 				F870D3E825129C0B008967B0 /* xDripClient */,
 				F870D3E22512701E008967B0 /* xDrip4iOS Widget.entitlements */,
@@ -3976,11 +3978,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APP_GROUP_IDENTIFIER = "group.com.${DEVELOPMENT_TEAM}.loopkit.LoopGroup";
-				CODE_SIGN_ENTITLEMENTS = "xDrip4iOS Widget/xDrip4iOS Widget.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "xDrip4iOS Widget/xDrip4iOSDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4152;
-				DEVELOPMENT_TEAM = RNX44PP998;
+				DEVELOPMENT_TEAM = T7VZ6LU6H3;
 				INFOPLIST_FILE = "xDrip4iOS Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3989,7 +3991,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 4.5.27;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.johandegraeve.xdripswift.xDrip4iOS-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.T7VZ6LU6H3.aps.xdripswift.xdripswift.xDrip4iOS-Widget";
 				PRODUCT_NAME = xDrip4iOS;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -4005,7 +4007,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4152;
-				DEVELOPMENT_TEAM = RNX44PP998;
+				DEVELOPMENT_TEAM = T7VZ6LU6H3;
 				INFOPLIST_FILE = "xDrip4iOS Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4014,7 +4016,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 4.5.27;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.johandegraeve.xdripswift.xDrip4iOS-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.T7VZ6LU6H3.aps.xdripswift.xDrip4iOS-Widget";
 				PRODUCT_NAME = xDrip4iOS;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -4154,7 +4156,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4152;
-				DEVELOPMENT_TEAM = RNX44PP998;
+				DEVELOPMENT_TEAM = T7VZ6LU6H3;
 				INFOPLIST_FILE = "$(SRCROOT)/xdrip/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4162,7 +4164,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 4.5.27;
-				PRODUCT_BUNDLE_IDENTIFIER = net.johandegraeve.xdripswift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.T7VZ6LU6H3.aps.xdripswift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "xdrip/xdrip-Bridging-Header.h";
@@ -4184,7 +4186,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4152;
-				DEVELOPMENT_TEAM = RNX44PP998;
+				DEVELOPMENT_TEAM = T7VZ6LU6H3;
 				INFOPLIST_FILE = "$(SRCROOT)/xdrip/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4192,7 +4194,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 4.5.27;
-				PRODUCT_BUNDLE_IDENTIFIER = net.johandegraeve.xdripswift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.T7VZ6LU6H3.aps.xdripswift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "xdrip/xdrip-Bridging-Header.h";
