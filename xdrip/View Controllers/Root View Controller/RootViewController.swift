@@ -104,6 +104,7 @@ final class RootViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var optionalSpacerView: UIView!
     
     /// outlets for statistics view
     @IBOutlet weak var statisticsView: UIView!
@@ -124,6 +125,7 @@ final class RootViewController: UIViewController {
     @IBOutlet weak var highLabelOutlet: UILabel!
     @IBOutlet weak var pieChartLabelOutlet: UILabel!
     @IBOutlet weak var timePeriodLabelOutlet: UILabel!
+    @IBOutlet weak var activityMonitorOutlet: UIActivityIndicatorView!
     
     /// user long pressed the value label
     @IBAction func valueLabelLongPressGestureRecognizerAction(_ sender: UILongPressGestureRecognizer) {
@@ -330,9 +332,10 @@ final class RootViewController: UIViewController {
         // viewWillAppear when user switches eg from Settings Tab to Home Tab - latest reading value needs to be shown on the view, and also update minutes ago etc.
         updateLabelsAndChart(overrideApplicationState: true)
         
-        // show the statistics view as required. If not, hide it
+        // show the statistics view as required. If not, hide it and show the spacer view to keep segmentedControlChartHours separated a bit more away from the main Tab bar
         statisticsView.isHidden = !UserDefaults.standard.showStatistics
         segmentedControlStatisticsDaysView.isHidden = !UserDefaults.standard.showStatistics
+        optionalSpacerView.isHidden = UserDefaults.standard.showStatistics
         
         // update statistics related outlets
         updateStatistics(animatePieChart: true, overrideApplicationState: true)
@@ -359,6 +362,18 @@ final class RootViewController: UIViewController {
         UserDefaults.standard.highMarkValueInUserChosenUnit = UserDefaults.standard.highMarkValueInUserChosenUnit
         UserDefaults.standard.bloodGlucoseUnitIsMgDl = UserDefaults.standard.bloodGlucoseUnitIsMgDl
         
+        
+        // set the localized text of the segmented controls
+        segmentedControlChartHours.setTitle("3" + Texts_Common.hourshort, forSegmentAt: 0)
+        segmentedControlChartHours.setTitle("6" + Texts_Common.hourshort, forSegmentAt: 1)
+        segmentedControlChartHours.setTitle("12" + Texts_Common.hourshort, forSegmentAt: 2)
+        segmentedControlChartHours.setTitle("24" + Texts_Common.hourshort, forSegmentAt:3)
+        
+        segmentedControlStatisticsDays.setTitle(Texts_Common.todayshort, forSegmentAt: 0)
+        segmentedControlStatisticsDays.setTitle("24" + Texts_Common.hourshort, forSegmentAt: 1)
+        segmentedControlStatisticsDays.setTitle("7" + Texts_Common.dayshort, forSegmentAt: 2)
+        segmentedControlStatisticsDays.setTitle("30" + Texts_Common.dayshort, forSegmentAt:3)
+        segmentedControlStatisticsDays.setTitle("90" + Texts_Common.dayshort, forSegmentAt:4)
                
         // update the segmented control of the chart hours
         switch UserDefaults.standard.chartWidthInHours
@@ -392,8 +407,6 @@ final class RootViewController: UIViewController {
              default:
                  break
              }
-        
-        //segmentedControlChartHours.setTitle("hello", forSegmentAt: 1)
         
                 
         // format the segmented control of the chart hours if possible (should normally be ok)
@@ -1880,6 +1893,23 @@ final class RootViewController: UIViewController {
             fromDate = Date(timeIntervalSinceNow: -3600.0 * 24.0 * Double(daysToUseStatistics))
         }
         
+        
+        // let's clean up statistics UI before calling the Statistics Manager
+        // we'll also show the activity monitor and change the statistics label colors to gray
+        self.pieChartOutlet.clear()
+        self.activityMonitorOutlet.isHidden = false
+        self.lowStatisticLabelOutlet.textColor = UIColor.lightGray
+        self.lowStatisticLabelOutlet.text = "-"
+        self.inRangeStatisticLabelOutlet.textColor = UIColor.lightGray
+        self.inRangeStatisticLabelOutlet.text = "-"
+        self.highStatisticLabelOutlet.textColor = UIColor.lightGray
+        self.highStatisticLabelOutlet.text = "-"
+        self.averageStatisticLabelOutlet.text = "-"
+        self.a1CStatisticLabelOutlet.text = "-"
+        self.cVStatisticLabelOutlet.text = "-"
+        self.timePeriodLabelOutlet.text = "---"
+        
+        
         // statisticsManager will calculate the statistics in background thread and call the callback function in the main thread
         statisticsManager?.calculateStatistics(fromDate: fromDate, toDate: nil, callback: { statistics in
             
@@ -1898,10 +1928,13 @@ final class RootViewController: UIViewController {
             
             
             // set all label outlets with the correctly formatted calculated values
+            self.lowStatisticLabelOutlet.textColor = ConstantsStatistics.labelLowColor
             self.lowStatisticLabelOutlet.text = Int(statistics.lowStatisticValue.round(toDecimalPlaces: 0)).description + "%"
             
+            self.inRangeStatisticLabelOutlet.textColor = ConstantsStatistics.labelInRangeColor
             self.inRangeStatisticLabelOutlet.text = Int(statistics.inRangeStatisticValue.round(toDecimalPlaces: 0)).description + "%"
             
+            self.highStatisticLabelOutlet.textColor = ConstantsStatistics.labelHighColor
             self.highStatisticLabelOutlet.text = Int(statistics.highStatisticValue.round(toDecimalPlaces: 0)).description + "%"
             
             self.averageStatisticLabelOutlet.text = (isMgDl ? Int(statistics.averageStatisticValue.round(toDecimalPlaces: 0)).description : statistics.averageStatisticValue.round(toDecimalPlaces: 1).description) + (isMgDl ? " mg/dl" : " mmol/l")
@@ -1926,8 +1959,6 @@ final class RootViewController: UIViewController {
                 self.timePeriodLabelOutlet.text = statistics.numberOfDaysUsed.description + " " + Texts_Common.days
             }
             
-            // let's remove the old pie chart
-            self.pieChartOutlet.clear()
             
             // disable the chart animation if it's just a normal update, enable it if the call comes from didAppear()
             if animatePieChart {
@@ -1938,6 +1969,9 @@ final class RootViewController: UIViewController {
             
             // we want to calculate how many hours have passed since midnight so that we can decide if we should show the easter egg. The user will almost always be in range at 01hrs in the morning so we don't want to show it until mid-morning or midday so that there is some sense of achievement
             let currentHoursSinceMidnight = Calendar.current.dateComponents([.hour], from: Calendar(identifier: .gregorian).startOfDay(for: Date()), to: Date()).hour!
+            
+            
+            self.activityMonitorOutlet.isHidden = true
             
             // if the user is 100% in range, show the easter egg and make them smile
             if statistics.inRangeStatisticValue < 100 {
