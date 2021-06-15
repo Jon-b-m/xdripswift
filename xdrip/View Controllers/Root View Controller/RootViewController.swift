@@ -151,7 +151,8 @@ final class RootViewController: UIViewController {
     @IBOutlet weak var clockView: UIView!
     @IBOutlet weak var clockLabelOutlet: UILabel!
         
-    @IBOutlet weak var sensorCountdownOutlet: UILabel!
+    @IBOutlet weak var sensorCountdownOutlet: UIImageView!
+    
     
     @IBAction func chartPanGestureRecognizerAction(_ sender: UIPanGestureRecognizer) {
         
@@ -2305,43 +2306,48 @@ final class RootViewController: UIViewController {
                 
                 switch currentSensorAgeInHours {
                     
-                case 0..<24:
-                    sensorAgeString = "1 • 2 • 3 • 4 • 5 • 6 • 7 • 8 • 9 • 10 • 11 • 12 • 13 • 14"
-                case 24..<48:
-                    sensorAgeString = "1 • 2 • 3 • 4 • 5 • 6 • 7 • 8 • 9 • 10 • 11 • 12 • 13"
-                case 48..<72:
-                    sensorAgeString =  "1 • 2 • 3 • 4 • 5 • 6 • 7 • 8 • 9 • 10 • 11 • 12"
-                case 72..<96:
-                    sensorAgeString = "1 • 2 • 3 • 4 • 5 • 6 • 7 • 8 • 9 • 10 • 11"
-                case 96..<120:
-                    sensorAgeString =  "1 • 2 • 3 • 4 • 5 • 6 • 7 • 8 • 9 • 10"
-                case 120..<144:
-                    sensorAgeString =  "1 • 2 • 3 • 4 • 5 • 6 • 7 • 8 • 9"
-                case 144..<168:
-                    sensorAgeString =  "1 • 2 • 3 • 4 • 5 • 6 • 7 • 8"
-                case 168..<192:
-                    sensorAgeString =  "1 • 2 • 3 • 4 • 5 • 6 • 7"
-                case 192..<216:
-                    sensorAgeString =  "1 • 2 • 3 • 4 • 5 • 6"
-                case 216..<240:
-                    sensorAgeString =  "1 • 2 • 3 • 4 • 5"
-                case 240..<264:
-                    sensorAgeString =  "1 • 2 • 3 • 4"
-                case 264..<288:
-                    sensorAgeString =  "1 • 2 • 3"
-                case 288..<312:
-                    sensorAgeString =  "1 • 2"
-                case 312..<324:
-                    sensorAgeString =  "• 1"
-                case 324..<330:
-                    sensorAgeString =  "• 1"
-                case 330...1000:
-                    sensorAgeString =  "• 1"
-                default:
-                    sensorAgeString =  ""
+                    case 0..<24:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_14")!
+                    case 24..<48:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_13")!
+                    case 48..<72:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_12")!
+                    case 72..<96:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_11")!
+                    case 96..<120:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_10")!
+                    case 120..<144:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_09")!
+                    case 144..<168:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_08")!
+                    case 168..<192:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_07")!
+                    case 192..<216:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_06")!
+                    case 216..<240:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_05")!
+                    case 240..<264:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_04")!
+                    case 264..<288:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_03")!
+                    case 288..<312:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_02")!
+                    case 312..<324:
+                        // still between 12 and 24 hours left
+                        sensorCountdownGraphic = UIImage(named: "sensor14_01")!
+                    case 324..<330:
+                        // just between 6 and 12 hours left, show the warning image
+                        sensorCountdownGraphic = UIImage(named: "sensor14_01_warning")!
+                    case 330...1000:
+                        // less than 6 hours left, show the urgent image
+                        sensorCountdownGraphic = UIImage(named: "sensor14_01_urgent")!
+                    default:
+                        sensorCountdownGraphic = UIImage(named: "sensor14_14")!
+                    
                 }
                 
-                sensorCountdownOutlet.text = sensorAgeString
+                // update the UIImage
+                sensorCountdownOutlet.image = sensorCountdownGraphic
                 
                 // show the sensor countdown image
                 sensorCountdownOutlet.isHidden = false
@@ -2351,8 +2357,8 @@ final class RootViewController: UIViewController {
             
             // this must be a sensor without a maxSensorAge set, so just hide the sensor countdown image and do nothing
             sensorCountdownOutlet.isHidden = true
+            
         }
-        
         
     }
 }

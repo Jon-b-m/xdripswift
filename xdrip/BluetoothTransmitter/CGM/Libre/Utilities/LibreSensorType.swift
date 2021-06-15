@@ -107,6 +107,7 @@ public enum LibreSensorType: String {
         return true
         
     }
+
     /// - reads the first byte in patchInfo and dependent on that value, returns type of sensor
     /// - if patchInfo = nil, then returnvalue is Libre1
     /// - if first byte is unknown, then returns nil
@@ -163,5 +164,11 @@ public enum LibreSensorType: String {
             return nil
 
         }
+        
     }
+    
+
+    
 }
+
+
