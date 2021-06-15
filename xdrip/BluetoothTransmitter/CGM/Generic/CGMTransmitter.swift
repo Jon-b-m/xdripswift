@@ -28,9 +28,6 @@ protocol CGMTransmitter:AnyObject {
     /// only applicable for Libre transmitters. To request a new reading.
     func requestNewReading()
     
-    /// maximum sensor age in minutes, nil if no maximum
-    func maxSensorAgeInDays() -> Int?
-    
 }
 
 /// cgm transmitter types

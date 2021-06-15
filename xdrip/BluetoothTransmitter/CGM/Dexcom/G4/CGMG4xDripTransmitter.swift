@@ -155,7 +155,7 @@ final class CGMG4xDripTransmitter: BluetoothTransmitter, CGMTransmitter {
         
     }
     
-    // MARK:- CGMTransmitter protocol functions
+    // MARK: -CGMTransmitter protocol functions
     
     // this transmitter does not support Libre non fixed slopes
     func setNonFixedSlopeEnabled(enabled: Bool) {   
@@ -183,13 +183,6 @@ final class CGMG4xDripTransmitter: BluetoothTransmitter, CGMTransmitter {
     
     func requestNewReading() {
         // not supported for Dexcom G4
-    }
-    
-    func maxSensorAgeInDays() -> Int? {
-        
-        // no max sensor age for Dexcom
-        return nil
-        
     }
     
     // MARK:- helper functions
